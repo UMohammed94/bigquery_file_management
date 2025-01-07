@@ -30,3 +30,8 @@ def clean_headers(df):
         .str.lower()  # Convert to lowercase
     )
     return df
+
+
+    # TODO add a check on date to make sure it is bq format aka YYYY-MM-DD
+    # TODO add a unique id column
+    # TODO add a check before uploadin if id does not exit then upload
