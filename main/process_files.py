@@ -30,5 +30,3 @@ def clean_headers(df):
         .str.lower()  # Convert to lowercase
     )
     return df
-
-process_excel_files(downloaded_csvs, files_to_upload_dir)

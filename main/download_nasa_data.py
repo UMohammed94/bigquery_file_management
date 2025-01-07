@@ -11,26 +11,29 @@ load_dotenv()
 
 # define your env variable
 API_KEY = os.getenv("api_key")
-
-# define your url
 BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed"
 
-# Define parameters for the API call
-params = {
-    "start_date": "2023-12-01",  # Start date in YYYY-MM-DD format
-    "end_date": "2023-12-07",    # End date in YYYY-MM-DD format
-    "api_key": API_KEY
-}
+def fetch_asteroid_data(start_date, end_date, api_key):
+    # Define parameters for the API call
+    params = {
+        "start_date": start_date,  # Start date in YYYY-MM-DD format
+        "end_date": end_date,    # End date in YYYY-MM-DD format
+        "api_key": api_key
+    }
 
-# Make the API request
-response = requests.get(BASE_URL, params=params)
+    # Make the API request
+    response = requests.get(BASE_URL, params=params)
 
-# Check the response status
-if response.status_code == 200:
-    # Parse the JSON data
-    data = response.json()
-    print('this is the data:',data)
+    # Check the response status
+    if response.status_code == 200:
+        # Parse the JSON data
+        data = response.json()
+        print('this is the data:',data)
+    else:
+        print(f"Failed to retrieve data: {response.status_code}")
+        return None
 
+def process_asteroid_data(data):
     # Prepare table data
     table_data = []
     headers = ["Date", "Name", "ID", "Diameter (Min M)", "Diameter (Max M)", "Potentially Hazardous"]
@@ -47,15 +50,28 @@ if response.status_code == 200:
             # Append row to table data
             table_data.append([date, name, neo_id, diameter_min, diameter_max, hazardous])
     
-     # Convert to DataFrame
-    df = pd.DataFrame(table_data, columns=headers)
+    return pd.DataFrame(table_data, columns=headers)
+
+def save_data_to_csv(df, output_dir):
     
     timestamp = datetime.now().strftime("%Y-%m-%d")
-
-    # Save to CSV
-    output_file = os.path.join(downloaded_csvs, f"asteroids_data_{timestamp}.csv")
+    output_file = os.path.join(output_dir, f"asteroids_data_{timestamp}.csv")
     df.to_csv(output_file, index=False)
-    
     print(f"Data successfully downloaded to: {output_file}")
-else:
-    print(f"Failed to retrieve data: {response.status_code}")
+
+def main():
+    # Define the date range
+    start_date = "2023-12-01"
+    end_date = "2023-12-07"
+
+    # Fetch data from the API
+    data = fetch_asteroid_data(start_date, end_date, API_KEY)
+    if data:
+        # Process the data into a DataFrame
+        df = process_asteroid_data(data)
+        
+        # Save the data to a CSV file
+        save_data_to_csv(df, downloaded_csvs)
+
+if __name__ == "__main__":
+    main()
