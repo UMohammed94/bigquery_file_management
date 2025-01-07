@@ -59,6 +59,7 @@ def save_data_to_csv(df, output_dir):
     df.to_csv(output_file, index=False)
     print(f"Data successfully downloaded to: {output_file}")
 
+# TODO: move to main.py
 def main():
     # Define the date range
     start_date = "2023-12-01"
