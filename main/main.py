@@ -6,6 +6,8 @@
 
 # # TODO: add logging
 # # TODO: this will be the base for uploading to big query
+# TODO: add logging
+
 
 # def main():
 #     process_excel_files(files_to_upload_dir)
