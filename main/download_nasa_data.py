@@ -3,7 +3,6 @@ import os
 import pandas as pd
 # library to import env variables
 from dotenv import load_dotenv
-from tabulate import tabulate
 from config import downloaded_csvs
 from datetime import datetime
 
