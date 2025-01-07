@@ -1,8 +1,10 @@
 import requests
 import os
+import pandas as pd
 # library to import env variables
 from dotenv import load_dotenv
 from tabulate import tabulate
+from config import downloaded_csvs
 
 # load env variables
 load_dotenv()
@@ -45,8 +47,13 @@ if response.status_code == 200:
             # Append row to table data
             table_data.append([date, name, neo_id, diameter_min, diameter_max, hazardous])
     
-    # Print the table
-    print(tabulate(table_data, headers=headers, tablefmt="grid"))
-
+     # Convert to DataFrame
+    df = pd.DataFrame(table_data, columns=headers)
+    
+    # Save to CSV
+    output_file = os.path.join(downloaded_csvs, "asteroids_data.csv")
+    df.to_csv(output_file, index=False)
+    
+    print(f"Data successfully downloaded to: {output_file}")
 else:
     print(f"Failed to retrieve data: {response.status_code}")
