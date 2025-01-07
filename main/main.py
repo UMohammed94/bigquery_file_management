@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from config import files_to_upload_dir, files_to_upload_dir, dataset_id, table_id
+from config import files_to_upload_dir, files_to_upload_dir, project_id, dataset_id, table_id
 from process_files import process_csv_files
 from upload_data_to_bigquery import get_bigquery_client, get_schema, load_csv_to_bigquery
 
@@ -17,7 +17,7 @@ def main():
     # Get the schema
     schema = get_schema()
     
-    load_csv_to_bigquery(client, schema, files_to_upload_dir, dataset_id, table_id)
+    load_csv_to_bigquery(client, schema, files_to_upload_dir, project_id, dataset_id, table_id)
     
     print("All files have been uploaded successfully.")
 

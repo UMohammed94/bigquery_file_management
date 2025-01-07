@@ -66,9 +66,9 @@ def add_unique_id(df, columns):
 #     return df
 
 
-# Main function to process the CSV files
-def main():
-    process_csv_files(downloaded_csvs, files_to_upload_dir)
+# # Main function to process the CSV files
+# def main():
+#     process_csv_files(downloaded_csvs, files_to_upload_dir)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

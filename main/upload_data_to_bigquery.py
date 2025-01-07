@@ -17,14 +17,14 @@ def get_schema():
         bigquery.SchemaField('potentially_hazardous','BOOL')
 ]
 
-def load_csv_to_bigquery(client, schema, csvs_to_upload_dir, dataset_id, table_id):
+def load_csv_to_bigquery(client, schema, csvs_to_upload_dir, project_id, dataset_id, table_id):
     """Load CSV files from a directory into a BigQuery table."""
     for filename in os.listdir(csvs_to_upload_dir):
         if filename.endswith('.csv'):
             file_path = os.path.join(csvs_to_upload_dir, filename)
             
             # Define the BigQuery table reference
-            table_ref = client.dataset(dataset_id).table(table_id)
+            table_ref = f"{project_id}.{dataset_id}.{table_id}"
             
             # Configure the load job
             job_config = bigquery.LoadJobConfig(
@@ -42,3 +42,4 @@ def load_csv_to_bigquery(client, schema, csvs_to_upload_dir, dataset_id, table_i
             load_job.result()
             
             print(f"Loaded {filename} into {dataset_id}:{table_id}")
+
