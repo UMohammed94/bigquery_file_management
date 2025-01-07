@@ -5,6 +5,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from tabulate import tabulate
 from config import downloaded_csvs
+from datetime import datetime
 
 # load env variables
 load_dotenv()
@@ -50,8 +51,10 @@ if response.status_code == 200:
      # Convert to DataFrame
     df = pd.DataFrame(table_data, columns=headers)
     
+    timestamp = datetime.now().strftime("%Y-%m-%d")
+
     # Save to CSV
-    output_file = os.path.join(downloaded_csvs, "asteroids_data.csv")
+    output_file = os.path.join(downloaded_csvs, f"asteroids_data_{timestamp}.csv")
     df.to_csv(output_file, index=False)
     
     print(f"Data successfully downloaded to: {output_file}")
