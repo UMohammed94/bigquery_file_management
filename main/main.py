@@ -34,7 +34,7 @@ def main():
 
     # step 2: process csv files for bigquery
     print('formatting csvs for bigquery...')
-    process_csv_files(files_to_upload_dir)
+    process_csv_files(downloaded_csvs,files_to_upload_dir)
     
     # step 3 : Initialize BigQuery client
     print('initalizing the bigquery client...')
