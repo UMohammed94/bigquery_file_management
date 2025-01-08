@@ -23,6 +23,7 @@ from download_nasa_data import fetch_asteroid_data, process_asteroid_data, save_
 
 def main():
     # step 1: Download data
+    print('fetching raw nasa data...')
     data = fetch_asteroid_data(NASA_REPORT_START_DATE, NASA_REPORT_END_DATE, API_KEY)
     if data:
         # Process the data into a DataFrame
@@ -32,16 +33,21 @@ def main():
         save_data_to_csv(df, downloaded_csvs)
 
     # step 2: process csv files for bigquery
+    print('formatting csvs for bigquery...')
     process_csv_files(files_to_upload_dir)
     
-    # : Initialize BigQuery client
+    # step 3 : Initialize BigQuery client
+    print('initalizing the bigquery client...')
     client = get_bigquery_client()
     
-    # Get the schema
+    # step 4: Get the schema
+    print('initializing the schema for bigquery...')
     schema = get_schema()
     
+    # step 5: Upload to bigquery
+    print('uploading your files...')
     load_csv_to_bigquery(client, schema, files_to_upload_dir, PROJECT_ID, DATASET_ID, TABLE_ID)
     
-    print("All files have been uploaded successfully.")
+    print("All files have been uploaded successfully!")
 
 main()
