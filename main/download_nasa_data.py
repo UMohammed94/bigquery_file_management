@@ -1,16 +1,13 @@
 import requests
 import os
 import pandas as pd
-# library to import env variables
 from dotenv import load_dotenv
-from config import downloaded_csvs
 from datetime import datetime
 
 # load env variables
 load_dotenv()
 
 # define your env variable
-API_KEY = os.getenv("api_key")
 BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed"
 
 def fetch_asteroid_data(start_date, end_date, api_key):
@@ -28,10 +25,10 @@ def fetch_asteroid_data(start_date, end_date, api_key):
     if response.status_code == 200:
         # Parse the JSON data
         data = response.json()
-        print('this is the data:',data)
     else:
         print(f"Failed to retrieve data: {response.status_code}")
         return None
+    return data
 
 def process_asteroid_data(data):
     # Prepare table data
@@ -52,28 +49,8 @@ def process_asteroid_data(data):
     
     return pd.DataFrame(table_data, columns=headers)
 
-def save_data_to_csv(df, output_dir):
-    
+def save_data_to_csv(df, output_dir): 
     timestamp = datetime.now().strftime("%Y-%m-%d")
     output_file = os.path.join(output_dir, f"asteroids_data_{timestamp}.csv")
     df.to_csv(output_file, index=False)
     print(f"Data successfully downloaded to: {output_file}")
-
-
-# TODO: move to main.py
-# def main():
-#     # Define the date range
-#     start_date = "2023-12-01"
-#     end_date = "2023-12-07"
-
-#     # Fetch data from the API
-#     data = fetch_asteroid_data(start_date, end_date, API_KEY)
-#     if data:
-#         # Process the data into a DataFrame
-#         df = process_asteroid_data(data)
-        
-#         # Save the data to a CSV file
-#         save_data_to_csv(df, downloaded_csvs)
-
-# if __name__ == "__main__":
-#     main()

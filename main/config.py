@@ -11,3 +11,7 @@ downloaded_csvs = current_dir / 'downloaded_files_'
 PROJECT_ID = os.getenv('project_id')
 DATASET_ID = os.getenv('dataset_id')
 TABLE_ID = os.getenv('table_id')
+API_KEY = os.getenv("api_key")
+
+NASA_REPORT_START_DATE = "2023-12-01"
+NASA_REPORT_END_DATE = "2023-12-07"

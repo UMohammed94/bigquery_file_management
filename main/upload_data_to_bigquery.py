@@ -15,7 +15,8 @@ def get_schema():
         bigquery.SchemaField('id','STRING'),
         bigquery.SchemaField('diameter_min_m','FLOAT64'),
         bigquery.SchemaField('diameter_max_m','FLOAT64'),
-        bigquery.SchemaField('potentially_hazardous','BOOL')
+        bigquery.SchemaField('potentially_hazardous','BOOL'),
+        bigquery.SchemaField('unique_id','STRING')
 ]
 
 def load_csv_to_bigquery(client, schema, csvs_to_upload_dir, project_id, dataset_id, table_id):
