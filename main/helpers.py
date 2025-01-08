@@ -1,13 +1,8 @@
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
 def construct_base_url():
     url_components = {
-        "scheme": os.getenv('scheme'),
-        "domain": os.getenv('domain'),
-        "path": os.getenv('path'),
+        "scheme": "https",
+        "domain": "api.nasa.gov",
+        "path": "neo/rest/v1/feed",
     }
     return url_components
 
