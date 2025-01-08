@@ -16,6 +16,7 @@ from upload_data_to_bigquery import get_bigquery_client, get_schema, load_csv_to
 # 5. logging matrix
 # 6. create a free google drive as back for data aka s3
 # 7. create a readme doc on how to authenticate with GCP
+# 8. create a small chart maybe using anaconda? or sql? or looker
 
 
 
