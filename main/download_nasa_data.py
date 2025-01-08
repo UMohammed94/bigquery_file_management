@@ -3,12 +3,10 @@ import os
 import pandas as pd
 from dotenv import load_dotenv
 from datetime import datetime
+from helpers import BASE_URL
 
 # load env variables
 load_dotenv()
-
-# define your env variable
-BASE_URL = "https://api.nasa.gov/neo/rest/v1/feed"
 
 def fetch_asteroid_data(start_date, end_date, api_key):
     # Define parameters for the API call
