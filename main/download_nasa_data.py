@@ -59,20 +59,21 @@ def save_data_to_csv(df, output_dir):
     df.to_csv(output_file, index=False)
     print(f"Data successfully downloaded to: {output_file}")
 
+
 # TODO: move to main.py
-def main():
-    # Define the date range
-    start_date = "2023-12-01"
-    end_date = "2023-12-07"
+# def main():
+#     # Define the date range
+#     start_date = "2023-12-01"
+#     end_date = "2023-12-07"
 
-    # Fetch data from the API
-    data = fetch_asteroid_data(start_date, end_date, API_KEY)
-    if data:
-        # Process the data into a DataFrame
-        df = process_asteroid_data(data)
+#     # Fetch data from the API
+#     data = fetch_asteroid_data(start_date, end_date, API_KEY)
+#     if data:
+#         # Process the data into a DataFrame
+#         df = process_asteroid_data(data)
         
-        # Save the data to a CSV file
-        save_data_to_csv(df, downloaded_csvs)
+#         # Save the data to a CSV file
+#         save_data_to_csv(df, downloaded_csvs)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

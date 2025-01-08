@@ -2,6 +2,7 @@ import pandas as pd
 import os
 from config import downloaded_csvs, files_to_upload_dir
 
+# TODO: AT THE END of the code, add a delete functionlity to upload the old files to archive and delete all files in the folder.
 def process_csv_files(downloaded_raw_dir, upload_dir):
     for filename in os.listdir(downloaded_raw_dir):
         filepath = os.path.join(downloaded_raw_dir, filename)
@@ -51,7 +52,8 @@ def add_unique_id(df, columns):
     return df
 
 
-# TODO: refactor to check if it exists in db
+# TODO: refactor to check if it exists in db and before uploading check if unique id exists, if it does, ignore ig it doesn't then upload
+
 # def check_existing_ids(df, upload_dir, id_column):
 #     existing_ids = set()
 #     for filename in os.listdir(upload_dir):
