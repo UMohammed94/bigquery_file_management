@@ -11,6 +11,7 @@
 # 6. create a readme doc on how to authenticate with GCP
 # 7. create a small chart maybe using anaconda? or sql? or looker?
 # 8. schedule it using a free service like github actions?
+# 9. add logging in other files
 
 import os
 import pandas as pd

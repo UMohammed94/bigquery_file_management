@@ -4,6 +4,7 @@ import pandas as pd
 from dotenv import load_dotenv
 from datetime import datetime
 from helpers import BASE_URL
+from log import logger
 
 # load env variables
 load_dotenv()
@@ -24,7 +25,7 @@ def fetch_asteroid_data(start_date, end_date, api_key):
         # Parse the JSON data
         data = response.json()
     else:
-        print(f"Failed to retrieve data: {response.status_code}")
+        logger.info(f"Failed to retrieve data: {response.status_code}")
         return None
     return data
 
@@ -51,4 +52,4 @@ def save_data_to_csv(df, output_dir):
     timestamp = datetime.now().strftime("%Y-%m-%d")
     output_file = os.path.join(output_dir, f"asteroids_data_{timestamp}.csv")
     df.to_csv(output_file, index=False)
-    print(f"Data successfully downloaded to: {output_file}")
+    logger.info(f"Data successfully downloaded to: {output_file}")

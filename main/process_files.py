@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-from config import downloaded_csvs, files_to_upload_dir
+from log import logger
 
 # TODO: AT THE END of the code, add a delete functionlity to upload the old files to archive and delete all files in the folder.
 def process_csv_files(downloaded_raw_dir, upload_dir):
@@ -27,10 +27,10 @@ def process_csv_files(downloaded_raw_dir, upload_dir):
                 csv_filename = os.path.splitext(filename)[0] + '_processed.csv'
                 csv_filepath = os.path.join(upload_dir, csv_filename)
                 df.to_csv(csv_filepath, index=False)
-                print(f'Saved {csv_filename} to {upload_dir}')
+                logger.info(f'Saved {csv_filename} to {upload_dir}')
 
             except Exception as e:
-                print(f'Failed to process {filename}: {e}')
+                logger.info(f'Failed to process {filename}: {e}')
 
 def clean_headers(df):
     df.columns = (

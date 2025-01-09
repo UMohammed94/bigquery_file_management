@@ -1,5 +1,7 @@
-from google.cloud import bigquery
 import os
+from log import logger
+from google.cloud import bigquery
+
 
 def get_bigquery_client():
     """Initialize and return a BigQuery client."""
@@ -42,5 +44,5 @@ def load_csv_to_bigquery(client, schema, csvs_to_upload_dir, project_id, dataset
             # Wait for the job to complete
             load_job.result()
             
-            print(f"Loaded {filename} into {dataset_id}:{table_id}")
+            logger.info(f"Loaded {filename} into {dataset_id}:{table_id}")
 
