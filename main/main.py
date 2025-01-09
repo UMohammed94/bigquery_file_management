@@ -15,6 +15,7 @@
 
 import os
 import pandas as pd
+from log import logger
 from config import files_to_upload_dir, files_to_upload_dir, downloaded_csvs, PROJECT_ID, DATASET_ID, TABLE_ID, NASA_REPORT_START_DATE, NASA_REPORT_END_DATE, API_KEY
 from process_files import process_csv_files
 from upload_data_to_bigquery import get_bigquery_client, get_schema, load_csv_to_bigquery
@@ -23,7 +24,7 @@ from download_nasa_data import fetch_asteroid_data, process_asteroid_data, save_
 
 def main():
     # step 1: Download data
-    print('fetching raw nasa data...')
+    logger.info('fetching raw nasa data...')
     data = fetch_asteroid_data(NASA_REPORT_START_DATE, NASA_REPORT_END_DATE, API_KEY)
     if data:
         # Process the data into a DataFrame
@@ -33,21 +34,21 @@ def main():
         save_data_to_csv(df, downloaded_csvs)
 
     # step 2: process csv files for bigquery
-    print('formatting csvs for bigquery...')
+    logger.info('formatting csvs for bigquery...')
     process_csv_files(downloaded_csvs,files_to_upload_dir)
     
     # step 3 : Initialize BigQuery client
-    print('initalizing the bigquery client...')
+    logger.info('initalizing the bigquery client...')
     client = get_bigquery_client()
     
     # step 4: Get the schema
-    print('initializing the schema for bigquery...')
+    logger.info('initializing the schema for bigquery...')
     schema = get_schema()
     
     # step 5: Upload to bigquery
-    print('uploading your files...')
+    logger.info('uploading your files...')
     load_csv_to_bigquery(client, schema, files_to_upload_dir, PROJECT_ID, DATASET_ID, TABLE_ID)
     
-    print("All files have been uploaded successfully!")
+    logger.info("All files have been uploaded successfully!")
 
 main()
