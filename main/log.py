@@ -2,7 +2,6 @@ import logging
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
 from datetime import datetime
-from config import log_output_dir  # Import log_output_dir from config
 
 
 def configure_logging(log_file: str = "app.log", level: int = logging.INFO) -> None:

@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
+from log import logger
 
 load_dotenv()
 
@@ -20,11 +21,11 @@ NASA_REPORT_END_DATE = "2023-12-07"
 required_dirs=[files_to_upload_dir, downloaded_csvs,log_output_dir]
 
 def create_directories(dirs: list) -> None:
+    logger.info(f"checking if required dirs exist")
     for dir_path in dirs:
         if not dir_path.exists():
             dir_path.mkdir(parents=True, exist_ok=True)
-            print(f"Created directory: {dir_path}")
-        else:
-            print(f"Directory already exists: {dir_path}")
+            logger.info(f"Created directory: {dir_path}")
+    logger.info(f"all required dirs exist.")
 
 create_directories(required_dirs)
