@@ -6,7 +6,6 @@ def get_bigquery_client():
     return bigquery.Client()
 
 # TODO: can we do this dynamically?
-# TODO: upade to add new unique id in schema
 def get_schema():
     """Return the schema for the BigQuery table."""
     return [

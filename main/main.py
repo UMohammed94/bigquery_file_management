@@ -7,11 +7,10 @@
 # 2. delete_Data_from_bigquery()
 # 3. Update_date_from_bigquery()
 # 4. copy_data_From_bigquery() 
-# 5. logging matrix
-# 6. create a free google drive as backup for data aka s3 bucket
-# 7. create a readme doc on how to authenticate with GCP
-# 8. create a small chart maybe using anaconda? or sql? or looker?
-# 9. schedule it using a free service like github actions?
+# 5. create a free google drive as backup for data aka s3 bucket
+# 6. create a readme doc on how to authenticate with GCP
+# 7. create a small chart maybe using anaconda? or sql? or looker?
+# 8. schedule it using a free service like github actions?
 
 import os
 import pandas as pd

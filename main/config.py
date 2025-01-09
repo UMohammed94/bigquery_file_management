@@ -16,3 +16,15 @@ API_KEY = os.getenv("api_key")
 
 NASA_REPORT_START_DATE = "2023-12-01"
 NASA_REPORT_END_DATE = "2023-12-07"
+
+required_dirs=[files_to_upload_dir, downloaded_csvs,log_output_dir]
+
+def create_directories(dirs: list) -> None:
+    for dir_path in dirs:
+        if not dir_path.exists():
+            dir_path.mkdir(parents=True, exist_ok=True)
+            print(f"Created directory: {dir_path}")
+        else:
+            print(f"Directory already exists: {dir_path}")
+
+create_directories(required_dirs)
