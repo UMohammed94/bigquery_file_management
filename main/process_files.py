@@ -20,9 +20,6 @@ def process_csv_files(downloaded_raw_dir, upload_dir):
                 # Add a unique ID column
                 df = add_unique_id(df, ['id', 'name', 'date'])
 
-                # # Check for existing IDs before upload
-                # df = check_existing_ids(df, upload_dir, 'unique_id')
-
                 # Save cleaned DataFrame to a new CSV file
                 csv_filename = os.path.splitext(filename)[0] + '_processed.csv'
                 csv_filepath = os.path.join(upload_dir, csv_filename)
@@ -51,26 +48,3 @@ def add_unique_id(df, columns):
         df['unique_id'] = df[columns].astype(str).agg('_'.join, axis=1)
     return df
 
-
-# TODO: refactor to check if it exists in db and before uploading check if unique id exists, if it does, ignore ig it doesn't then upload
-
-# def check_existing_ids(df, upload_dir, id_column):
-#     existing_ids = set()
-#     for filename in os.listdir(upload_dir):
-#         if filename.endswith('.csv'):
-#             existing_df = pd.read_csv(os.path.join(upload_dir, filename))
-#             if id_column in existing_df.columns:
-#                 existing_ids.update(existing_df[id_column].dropna().unique())
-    
-#     # Filter out rows with existing IDs
-#     if id_column in df.columns:
-#         df = df[~df[id_column].isin(existing_ids)]
-#     return df
-
-
-# # Main function to process the CSV files
-# def main():
-#     process_csv_files(downloaded_csvs, files_to_upload_dir)
-
-# if __name__ == "__main__":
-#     main()
